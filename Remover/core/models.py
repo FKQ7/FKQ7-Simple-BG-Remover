@@ -1,3 +1,4 @@
 from django.db import models
 
-# Create your models here.
+class ImageUpload(models.Model):
+    upload_count = models.IntegerField(default=0)

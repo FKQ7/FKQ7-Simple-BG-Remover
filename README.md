@@ -1,1 +1,3 @@
-# FKQ7-Simple-BG-Remover
+# Simple BackGround Remover
+Requirements
+pip install Djnago Pillow rembg

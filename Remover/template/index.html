@@ -1,3 +1,5 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,30 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload and Process Image</title>
     <!-- Include Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-zinc-900 text-white flex justify-center items-center h-screen">
+<body class="bg-gray-900 text-white flex justify-center items-center h-screen">
     <div class="w-full max-w-md p-8 rounded-lg shadow-lg bg-gray-800">
         <h1 class="text-3xl font-bold mb-6 text-center">Upload and Process Image</h1>
         <form action="/" method="post" enctype="multipart/form-data" class="mb-6">
             {% csrf_token %}
             <label for="image" class="block text-sm font-medium mb-2">Select an image:</label>
             <input type="file" id="image" name="image" accept="image/*" required class="p-2 border border-gray-600 rounded-lg w-full">
-            <p><span class="text-bold">Note :The Images you upload Will not be saved on ower DataBase</span></p>
-            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-4 w-full">Upload</button>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 w-full">Upload</button>
         </form>
 
         <!-- Display the processed image if available -->
         {% if html_content %}
-            <div class="mb-6 ">
-                {{ html_content|safe }}
-            </div>
-            <div>
-                <a href="data:image/png;base64,{{ html_content }}" download="processed_image.png">
-                    <button class="bg-green-500 text-white px-4 py-2 rounded-lg w-full">Download Processed Image</button>
-                </a>
-            </div>
+        <div class="mb-6 flex justify-center">
+            {{ html_content|safe }}
+        </div>
+        <div>
+            <a href="data:image/png;base64,{{ html_content }}" download="processed_image.png">
+                <button class="bg-green-500 text-white px-4 py-2 rounded-lg w-full">Download Processed Image</button>
+            </a>
+        </div>
         {% endif %}
+
+        <!-- Display upload count and visitor count -->
+        <div class="mt-6 text-center text-sm text-gray-500">
+            <p>Upload Count: {{ upload_count }}</p>
+            <p>Visitor Count: {{ visitor_count }}</p>
+        </div>
     </div>
 </body>
 </html>
